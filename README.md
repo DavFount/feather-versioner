@@ -53,6 +53,8 @@ feather versions help
 
 Manual checks respect `ManualRefreshCooldownSeconds`. Periodic checks use jitter, bounded concurrency, ETags, response deadlines, retry backoff, and stale-cache fallback.
 
+Console reports use semantic Cfx colors by default: green for current or pinned, yellow for updates or ignored releases, blue for locally-ahead versions, and red for unknown or error states. Set `ConsoleColors = false` in `config.lua` for plain text output.
+
 ## Cache and outages
 
 Versioner writes only `versioner-cache.json` and its backup inside its own resource. Corrupt cache data is ignored. A valid backup is used when the primary file cannot be decoded. Network failures retain a previously valid cached release as stale and never block other resources.

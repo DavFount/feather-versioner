@@ -14,18 +14,55 @@ Config = {
     MaxReleaseTitleBytes = 160,
     ReportCurrent = false,
     ReportSummary = true,
+    ConsoleColors = true,
     IncludeReleaseTitle = true,
     ReportNewerThanPin = false,
     AllowManifestDiscovery = false,
     AllowedOwners = { 'FeatherFramework' },
     CacheFile = 'versioner-cache.json',
     Resources = {
+        ['feather-menu'] = {
+            repository = 'FeatherFramework/feather-menu',
+            channel = 'stable'
+        },
         ['feather-core'] = {
             repository = 'FeatherFramework/feather-core',
             channel = 'stable'
         },
+        ['feather-routing'] = {
+            repository = 'FeatherFramework/feather-routing',
+            channel = 'stable'
+        },
+        ['feather-notify'] = {
+            repository = 'FeatherFramework/feather-notify',
+            channel = 'stable'
+        },
+        ['feather-world'] = {
+            repository = 'FeatherFramework/feather-world',
+            channel = 'stable'
+        },
+        ['feather-pvp'] = {
+            repository = 'FeatherFramework/feather-pvp',
+            channel = 'stable'
+        },
+        ['feather-toolkit'] = {
+            repository = 'FeatherFramework/feather-toolkit',
+            channel = 'stable'
+        },
+        ['feather-hud'] = {
+            repository = 'FeatherFramework/feather-hud',
+            channel = 'stable'
+        },
         ['feather-character'] = {
             repository = 'FeatherFramework/feather-character',
+            channel = 'stable'
+        },
+        ['feather-roles'] = {
+            repository = 'FeatherFramework/feather-roles',
+            channel = 'stable'
+        },
+        ['feather-inventory'] = {
+            repository = 'FeatherFramework/feather-inventory',
             channel = 'stable'
         },
         ['feather-weapons'] = {
@@ -36,12 +73,12 @@ Config = {
             repository = 'FeatherFramework/feather-admin',
             channel = 'stable'
         },
-        ['feather-inventory'] = {
-            repository = 'FeatherFramework/feather-inventory',
+        ['feather-settings'] = {
+            repository = 'FeatherFramework/feather-settings',
             channel = 'stable'
         },
-        ['feather-hud'] = {
-            repository = 'FeatherFramework/feather-hud',
+        ['feather-versioner'] = {
+            repository = 'FeatherFramework/feather-versioner',
             channel = 'stable'
         },
     }

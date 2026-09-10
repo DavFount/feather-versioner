@@ -1,5 +1,31 @@
 VersionerReporter = {}
 
+local colors = {
+    reset = '^0',
+    label = '^5',
+    current = '^2',
+    pinned = '^2',
+    outdated = '^3',
+    ahead = '^4',
+    ignored = '^3',
+    unknown = '^1',
+    error = '^1'
+}
+
+local function colorize(value, color)
+    value = tostring(value)
+    if Config.ConsoleColors == false or not color then return value end
+    return color .. value .. colors.reset
+end
+
+local function prefix()
+    return colorize('[Feather Versions]', colors.label)
+end
+
+local function statusColor(status)
+    return colors[status or 'unknown'] or colors.unknown
+end
+
 local function compareInstalled(entry, target)
     local compared = VersionerSemver.Compare(entry.installed.parsed, target)
     if not compared.ok then return 'error', compared end
@@ -49,18 +75,30 @@ end
 function VersionerReporter.PrintOne(entry)
     local installed = entry.installed and entry.installed.raw or 'unknown'
     local target = entry.target and (entry.target.version or entry.target.tag) or 'unknown'
-    print(('[Feather Versions] [%s] %s installed=%s target=%s%s'):format((entry.status or 'unknown'):upper(), entry.label, installed, target, entry.stale and ' stale=true' or ''))
-    if entry.status == 'outdated' and entry.target and entry.target.url then print(('  Release: %s'):format(entry.target.url)) end
+    local status = entry.status or 'unknown'
+    print(('%s %s %s installed=%s target=%s%s'):format(prefix(), colorize(('[%s]'):format(status:upper()), statusColor(status)), entry.label, installed, target, entry.stale and ' stale=true' or ''))
+    if entry.status == 'outdated' and entry.target and entry.target.url then print(('  %s %s'):format(colorize('Release:', colors.outdated), entry.target.url)) end
     if Config.IncludeReleaseTitle and entry.target and entry.target.title and entry.target.title ~= '' then print(('  Title: %s'):format(entry.target.title)) end
-    if entry.error then print(('  Reason: %s (%s)'):format(entry.error.message or 'Unknown error', entry.error.code or 'error')) end
-    if entry.warning then print(('  Stale reason: %s (%s)'):format(entry.warning.message or 'Unknown error', entry.warning.code or 'error')) end
+    if entry.error then print(('  %s %s (%s)'):format(colorize('Reason:', colors.error), entry.error.message or 'Unknown error', entry.error.code or 'error')) end
+    if entry.warning then print(('  %s %s (%s)'):format(colorize('Stale reason:', colors.ignored), entry.warning.message or 'Unknown error', entry.warning.code or 'error')) end
 end
 
 function VersionerReporter.Print(entries, requestedName)
-    if requestedName then local entry = entries[requestedName]; if not entry then print(('[Feather Versions] Resource is not configured: %s'):format(requestedName)); return end; VersionerReporter.PrintOne(entry); return end
+    if requestedName then local entry = entries[requestedName]; if not entry then print(('%s %s'):format(prefix(), colorize(('Resource is not configured: %s'):format(requestedName), colors.error))); return end; VersionerReporter.PrintOne(entry); return end
     local counts, total = {}, 0
     local names = {}; for name in pairs(entries) do names[#names + 1] = name end; table.sort(names)
     for _, name in ipairs(names) do local entry=entries[name];counts[entry.status or 'unknown'] = (counts[entry.status or 'unknown'] or 0) + 1; total = total + 1 end
-    if Config.ReportSummary then print(('[Feather Versions] %d checked: %d current, %d pinned, %d update available, %d ahead, %d ignored, %d unknown/error'):format(total, counts.current or 0, counts.pinned or 0, counts.outdated or 0, counts.ahead or 0, counts.ignored or 0, (counts.unknown or 0) + (counts.error or 0))) end
+    if Config.ReportSummary then
+        local summary = {
+            ('%d checked:'):format(total),
+            colorize(('%d current'):format(counts.current or 0), colors.current),
+            colorize(('%d pinned'):format(counts.pinned or 0), colors.pinned),
+            colorize(('%d update available'):format(counts.outdated or 0), colors.outdated),
+            colorize(('%d ahead'):format(counts.ahead or 0), colors.ahead),
+            colorize(('%d ignored'):format(counts.ignored or 0), colors.ignored),
+            colorize(('%d unknown/error'):format((counts.unknown or 0) + (counts.error or 0)), colors.error)
+        }
+        print(('%s %s %s'):format(prefix(), summary[1], table.concat(summary, ', ', 2)))
+    end
     for _, name in ipairs(names) do local entry=entries[name];if Config.ReportCurrent or entry.status ~= 'current' then VersionerReporter.PrintOne(entry) end end
 end

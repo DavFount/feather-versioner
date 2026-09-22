@@ -21,12 +21,24 @@ Config = {
     AllowedOwners = { 'FeatherFramework' },
     CacheFile = 'versioner-cache.json',
     Resources = {
+        ['feather-loadscreen'] = {
+            repository = 'FeatherFramework/feather-loadscreen',
+            channel = 'stable'
+        },
         ['feather-menu'] = {
             repository = 'FeatherFramework/feather-menu',
             channel = 'stable'
         },
+        ['feather-menu-v2'] = {
+            repository = 'FeatherFramework/feather-menu-v2',
+            channel = 'prerelease'
+        },
         ['feather-core'] = {
             repository = 'FeatherFramework/feather-core',
+            channel = 'stable'
+        },
+        ['feather-economy'] = {
+            repository = 'FeatherFramework/feather-economy',
             channel = 'stable'
         },
         ['feather-routing'] = {
@@ -57,10 +69,6 @@ Config = {
             repository = 'FeatherFramework/feather-character',
             channel = 'stable'
         },
-        ['feather-roles'] = {
-            repository = 'FeatherFramework/feather-roles',
-            channel = 'stable'
-        },
         ['feather-inventory'] = {
             repository = 'FeatherFramework/feather-inventory',
             channel = 'stable'
@@ -69,8 +77,20 @@ Config = {
             repository = 'FeatherFramework/feather-weapons',
             channel = 'stable'
         },
+        ['feather-organizations'] = {
+            repository = 'FeatherFramework/feather-organizations',
+            channel = 'stable'
+        },
+        ['feather-authority'] = {
+            repository = 'FeatherFramework/feather-authority',
+            channel = 'stable'
+        },
         ['feather-admin'] = {
             repository = 'FeatherFramework/feather-admin',
+            channel = 'stable'
+        },
+        ['feather-shops'] = {
+            repository = 'FeatherFramework/feather-shops',
             channel = 'stable'
         },
         ['feather-settings'] = {

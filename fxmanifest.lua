@@ -6,7 +6,7 @@ lua54 'yes'
 name 'feather-versioner'
 description 'Optional, operator-owned GitHub release notification service for Feather Framework'
 author 'Feather Framework'
-version '0.1.1'
+version '0.1.2'
 
 shared_scripts {
     'config.lua',

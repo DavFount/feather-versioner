@@ -97,6 +97,10 @@ Config = {
             repository = 'FeatherFramework/feather-settings',
             channel = 'stable'
         },
+        ['feather-chat'] = {
+            repository = 'FeatherFramework/feather-chat',
+            channel = 'stable'
+        },
         ['feather-versioner'] = {
             repository = 'FeatherFramework/feather-versioner',
             channel = 'stable'

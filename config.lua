@@ -25,10 +25,6 @@ Config = {
             repository = 'FeatherFramework/feather-loadscreen',
             channel = 'stable'
         },
-        ['feather-menu'] = {
-            repository = 'FeatherFramework/feather-menu',
-            channel = 'stable'
-        },
         ['feather-menu-v2'] = {
             repository = 'FeatherFramework/feather-menu-v2',
             channel = 'prerelease'

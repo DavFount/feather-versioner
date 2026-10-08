@@ -101,6 +101,10 @@ Config = {
             repository = 'FeatherFramework/feather-medical',
             channel = 'stable'
         },
+        ['feather-audit'] = {
+            repository = 'FeatherFramework/feather-audit',
+            channel = 'stable'
+        },
         ['feather-versioner'] = {
             repository = 'FeatherFramework/feather-versioner',
             channel = 'stable'
